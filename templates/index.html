@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="Artem Alimpiev | Portfolio 2025" data-ru="Артем Алимпиев | Портфолио 2025">Артем Алимпиев |
+        Портфолио 2025</title>
+
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        },
+                        accent: '#8b5cf6',
+                        secondary: '#10b981',
+                        dark: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Space Grotesk', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'gradient': 'gradient 8s ease infinite',
+                        'blob': 'blob 10s infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'slide-in': 'slideIn 0.5s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dark .glass-effect {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-bar {
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+
+        .project-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(14, 165, 233, 0.3);
+            box-shadow: 0 20px 40px -12px rgba(14, 165, 233, 0.25);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 50%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(-45deg, #0ea5e9, #8b5cf6, #10b981, #0ea5e9);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        .language-switcher {
+            transition: all 0.3s ease;
+        }
+
+        .language-switcher.active {
+            background: rgba(14, 165, 233, 0.2);
+            color: #0ea5e9;
+        }
+
+        .animation-delay-500 {
+            animation-delay: 500ms;
+        }
+
+        .animation-delay-1000 {
+            animation-delay: 1000ms;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2000ms;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4000ms;
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-gray-50 text-gray-800 dark:bg-dark-900 dark:text-gray-100 transition-colors duration-300">
+
+<!-- Animated Background Elements -->
+<div class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-accent rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+    <div class="absolute top-1/2 left-1/3 w-80 h-80 bg-secondary rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+</div>
+
+<!-- Header/Navigation -->
+<header class="sticky top-0 z-50 glass-effect shadow-sm">
+    <nav class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+            <a href="#" class="text-2xl font-display font-bold">
+                <span class="gradient-text" data-en="Artem Alimpiev" data-ru="Артем Алимпиев">Артем Алимпиев</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#about" class="font-medium hover:text-primary-500 transition-colors" data-en="About"
+                   data-ru="Обо мне">Обо мне</a>
+                <a href="#projects" class="font-medium hover:text-primary-500 transition-colors" data-en="Projects"
+                   data-ru="Проекты">Проекты</a>
+                <a href="#skills" class="font-medium hover:text-primary-500 transition-colors" data-en="Skills"
+                   data-ru="Навыки">Навыки</a>
+                <a href="#contact" class="font-medium hover:text-primary-500 transition-colors" data-en="Contact"
+                   data-ru="Контакты">Контакты</a>
+
+                <!-- Language Switcher -->
+                <div class="flex items-center space-x-1 bg-gray-200 dark:bg-dark-700 rounded-lg p-1 ml-4">
+                    <button id="lang-ru" class="language-switcher px-3 py-1 rounded-md text-sm font-medium active">
+                        RU
+                    </button>
+                    <button id="lang-en" class="language-switcher px-3 py-1 rounded-md text-sm font-medium">
+                        EN
+                    </button>
+                </div>
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle"
+                        class="p-2 rounded-lg bg-gray-200 dark:bg-dark-700 hover:bg-gray-300 dark:hover:bg-dark-600 transition-colors">
+                    <svg id="sun-icon" class="w-5 h-5 text-gray-800 dark:hidden" fill="currentColor"
+                         viewBox="0 0 20 20">
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path>
+                    </svg>
+                    <svg id="moon-icon" class="w-5 h-5 text-gray-100 hidden dark:block" fill="currentColor"
+                         viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-toggle" class="md:hidden p-2 rounded-lg bg-gray-200 dark:bg-dark-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-4">
+            <a href="#about" class="block font-medium hover:text-primary-500" data-en="About" data-ru="Обо мне">Обо
+                мне</a>
+            <a href="#projects" class="block font-medium hover:text-primary-500" data-en="Projects" data-ru="Проекты">Проекты</a>
+            <a href="#skills" class="block font-medium hover:text-primary-500" data-en="Skills"
+               data-ru="Навыки">Навыки</a>
+            <a href="#contact" class="block font-medium hover:text-primary-500" data-en="Contact" data-ru="Контакты">Контакты</a>
+
+            <div class="flex items-center space-x-4 pt-4">
+                <div class="flex items-center space-x-1 bg-gray-200 dark:bg-dark-700 rounded-lg p-1">
+                    <button id="mobile-lang-ru"
+                            class="language-switcher px-3 py-1 rounded-md text-sm font-medium active">
+                        RU
+                    </button>
+                    <button id="mobile-lang-en" class="language-switcher px-3 py-1 rounded-md text-sm font-medium">
+                        EN
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="container mx-auto px-6 py-20 md:py-32">
+    <div class="flex flex-col md:flex-row items-center justify-between">
+        <div class="md:w-1/2 mb-12 md:mb-0 animate-fade-in-up">
+            <div class="inline-flex items-center px-4 py-2 rounded-full bg-primary-100 dark:bg-dark-800 text-primary-600 dark:text-primary-400 mb-6">
+                <span class="h-2 w-2 bg-primary-500 rounded-full mr-2"></span>
+                <span data-en="Available for new opportunities" data-ru="Открыт для новых возможностей">Открыт для новых возможностей</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-display font-bold mb-6">
+                <span data-en="Building the future with" data-ru="Строим будущее с">Строим будущее с</span>
+                <span class="gradient-text" data-en="code & AI" data-ru="кодом & ИИ">кодом & ИИ</span>
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+                    <span data-en="I'm a Python developer creating cutting-edge solutions that bridge modern web APIs with intelligent AI systems."
+                          data-ru="Я Python-разработчик, создающий передовые решения, которые соединяют современные веб-API с интеллектуальными системами ИИ.">
+                        Я Python-разработчик, создающий передовые решения, которые соединяют современные веб-API с интеллектуальными системами ИИ.
+                    </span>
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#projects"
+                   class="px-8 py-3 bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-lg transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+                   data-en="View Projects" data-ru="Смотреть проекты">
+                    Смотреть проекты
+                </a>
+                <a href="#contact"
+                   class="px-8 py-3 glass-effect font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-dark-800 transition-colors"
+                   data-en="Get in Touch" data-ru="Связаться">
+                    Связаться
+                </a>
+            </div>
+        </div>
+
+        <!-- Photo Section -->
+        <div class="md:w-2/5 relative mt-8 md:mt-0">
+            <div class="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
+                <!-- Animated gradient background -->
+                <div class="absolute inset-0 bg-gradient-to-br from-primary-500 via-accent to-secondary rounded-full animate-float opacity-80"></div>
+
+                <!-- Photo container with glass effect and border -->
+                <div class="absolute inset-2 md:inset-4 rounded-full overflow-hidden border-4 border-white/20 dark:border-dark-800/20 shadow-2xl">
+                    <!-- Ваше фото -->
+                    <img src="/static/profile.jpg"
+                         alt="Artem Alimpiev Photo"
+                         id="profile-photo"
+                         data-en-alt="Artem Alimpiev Photo"
+                         data-ru-alt="Фото Артем Алимпиев"
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'; this.alt='Default profile image';">
+                </div>
+
+                <!-- Decorative elements -->
+                <div class="absolute -top-2 -right-2 w-16 h-16 bg-primary-500 rounded-full opacity-20 animate-pulse"></div>
+                <div class="absolute -bottom-2 -left-2 w-12 h-12 bg-accent rounded-full opacity-20 animate-pulse animation-delay-1000"></div>
+            </div>
+
+            <!-- Contact info under photo -->
+            <div class="mt-8 text-center animate-fade-in-up animation-delay-500">
+                <div class="flex flex-col items-center space-y-2">
+                    <div class="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <span>alimpievne@gmail.com</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <span data-en="Saint Petersburg, Russia" data-ru="Санкт-петербург, Россия">Санкт-петербург, Россия</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="container mx-auto px-6 py-20">
+    <div class="max-w-3xl mx-auto">
+        <div class="flex items-center mb-12">
+            <div class="h-px flex-grow bg-gradient-to-r from-primary-500 to-accent"></div>
+            <h2 class="text-3xl md:text-4xl font-display font-bold px-6" data-en="About Me" data-ru="Обо мне">Обо
+                мне</h2>
+            <div class="h-px flex-grow bg-gradient-to-l from-primary-500 to-accent"></div>
+        </div>
+        <div class="glass-effect rounded-2xl p-8 md:p-12 animate-slide-in">
+            <p class="text-lg md:text-xl leading-relaxed mb-6">
+                {{ about }}
+            </p>
+            <p class="text-lg md:text-xl leading-relaxed">
+                    <span data-en="I design and implement fault-tolerant backend systems using Django and FastAPI. I specialize in creating scalable architecture and seamless service integration that optimize business processes and reduce technical debt through clean code and a well-thought-out Developer Experience (DX)."
+                          data-ru="Проектирую и внедряю отказоустойчивые backend-системы на Django и FastAPI. Специализируюсь на создании масштабируемой архитектуры и бесшовной интеграции сервисов, которые оптимизируют бизнес-процессы и сокращают технический долг через чистоту кода и продуманный DX (Developer Experience).">
+                        Проектирую и внедряю отказоустойчивые backend-системы на Django и FastAPI. Специализируюсь на создании масштабируемой архитектуры и бесшовной интеграции сервисов, которые оптимизируют бизнес-процессы и сокращают технический долг через чистоту кода и продуманный DX (Developer Experience).
+                    </span>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="container mx-auto px-6 py-20">
+    <h2 class="text-3xl md:text-4xl font-display font-bold text-center mb-4" data-en="Featured Projects"
+        data-ru="Избранные проекты">Избранные проекты</h2>
+    <p class="text-gray-600 dark:text-gray-400 text-center mb-12 max-w-2xl mx-auto"
+       data-en="Explore my latest work combining AI, web technologies, and innovative solutions"
+       data-ru="Исследуйте мои последние работы, сочетающие ИИ, веб-технологии и инновационные решения">
+        Исследуйте мои последние работы, сочетающие ИИ, веб-технологии и инновационные решения
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for project in projects %}
+        <div class="project-card bg-white dark:bg-dark-800 rounded-2xl p-6 shadow-lg">
+            <div class="gradient-bg w-12 h-12 rounded-xl flex items-center justify-center mb-4">
+                <span class="text-white font-bold">{{ loop.index }}</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">{{ project.title }}</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">{{ project.desc }}</p>
+            <div class="flex items-center justify-between mt-6">
+                <a href="{{ project.link }}" target="_blank"
+                   class="text-primary-500 hover:text-primary-600 font-medium flex items-center group">
+                    <span data-en="View Project" data-ru="Смотреть проект">Смотреть проект</span>
+                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none"
+                         stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
+                <span class="px-3 py-1 text-xs rounded-full bg-primary-100 dark:bg-dark-700 text-primary-600 dark:text-primary-400">
+                        {{ "Django" if "AI" in project.desc else "Веб" if "Web" in project.desc else "Облако" }}
+                    </span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="container mx-auto px-6 py-20">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-display font-bold mb-4" data-en="Technical Expertise"
+                data-ru="Технические навыки">Технические навыки</h2>
+            <p class="text-gray-600 dark:text-gray-400"
+               data-en="Mastering the tools and technologies that power modern applications"
+               data-ru="Владение инструментами и технологиями, которые питают современные приложения">
+                Владение инструментами и технологиями, которые питают современные приложения
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {% for skill in skills %}
+            <div class="bg-white dark:bg-dark-800 rounded-xl p-6 shadow-sm">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="font-medium">{{ skill }}</span>
+                    <span class="text-sm text-primary-600 dark:text-primary-400">{{ [90, 85, 88, 92, 95, 80, 90][loop.index0] }}%</span>
+                </div>
+                <div class="skill-bar bg-gray-200 dark:bg-dark-700">
+                    <div class="skill-progress bg-gradient-to-r from-primary-500 to-accent"
+                         style="width: {{ [90, 85, 88, 92, 95][loop.index0] }}%"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Tech Stack Icons -->
+        <div class="mt-16">
+            <h3 class="text-xl font-bold text-center mb-8" data-en="Technology Stack" data-ru="Технологический стек">
+                Технологический стек</h3>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 justify-items-center">
+                <div class="tech-icon flex flex-col items-center w-20">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                        Py
+                    </div>
+                    <p class="text-xs text-center mt-2 font-medium truncate w-full">Python</p>
+                </div>
+                <div class="tech-icon flex flex-col items-center w-20">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-400 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                        FA
+                    </div>
+                    <p class="text-xs text-center mt-2 font-medium truncate w-full">FastAPI</p>
+                </div>
+                <div class="tech-icon flex flex-col items-center w-20">
+                    <div class="w-12 h-12 bg-gradient-to-br from-emerald-600 to-green-800 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                        Dj
+                    </div>
+                    <p class="text-xs text-center mt-2 font-medium truncate w-full">Django</p>
+                </div>
+                <div class="tech-icon flex flex-col items-center w-20">
+                    <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-400 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                        PG
+                    </div>
+                    <p class="text-xs text-center mt-2 font-medium truncate w-full">PostgreSQL</p>
+                </div>
+                <div class="tech-icon flex flex-col items-center w-20">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-amber-400 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                        CL
+                    </div>
+                    <p class="text-xs text-center mt-2 font-medium truncate w-full">Cloud</p>
+                </div>
+                <div class="tech-icon flex flex-col items-center w-20">
+                    <div class="w-12 h-12 bg-gradient-to-br from-gray-600 to-gray-800 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                        Gi
+                    </div>
+                    <p class="text-xs text-center mt-2 font-medium truncate w-full">Git</p>
+                </div>
+            </div>
+
+            <!-- Additional technologies as tags -->
+            <div class="mt-8 text-center">
+                <p class="text-gray-600 dark:text-gray-400 mb-4" data-en="Also experienced with:"
+                   data-ru="Также опыт работы с:">
+                    Также опыт работы с:
+                </p>
+                <div class="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto">
+                    <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300 truncate max-w-[120px]">HTML/CSS</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300 truncate max-w-[120px]">JavaScript</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300 truncate max-w-[120px]">Docker</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300 truncate max-w-[120px]">REST API</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300 truncate max-w-[120px]">Linux</span>
+                    <span class="px-3 py-1 text-xs rounded-full bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300 truncate max-w-[120px]">Nginx</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Section -->
+<section id="contact" class="container mx-auto px-6 py-20">
+    <div class="max-w-2xl mx-auto">
+        <div class="glass-effect rounded-2xl p-8 md:p-12">
+            <h2 class="text-3xl md:text-4xl font-display font-bold mb-4" data-en="Let's Build Something Amazing"
+                data-ru="Давайте создадим что-то удивительное">Давайте создадим что-то удивительное</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8"
+               data-en="Have a project in mind? Let's discuss how we can work together to bring your ideas to life."
+               data-ru="Есть проект? Обсудим, как мы можем работать вместе, чтобы воплотить ваши идеи в жизнь.">
+                Есть проект? Обсудим, как мы можем работать вместе, чтобы воплотить ваши идеи в жизнь.
+            </p>
+
+            <form action="/contact" method="post" class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium mb-2" data-en="Your Name" data-ru="Ваше имя">Ваше
+                            имя</label>
+                        <input type="text" name="name" required
+                               class="w-full px-4 py-3 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all"
+                               placeholder="Иван Иванов" data-en-placeholder="John Doe"
+                               data-ru-placeholder="Иван Иванов">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2" data-en="Email Address"
+                               data-ru="Электронная почта">Электронная почта</label>
+                        <input type="email" name="email" required
+                               class="w-full px-4 py-3 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all"
+                               placeholder="ivan@example.com" data-en-placeholder="hello@example.com"
+                               data-ru-placeholder="ivan@example.com">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2" data-en="Your Message" data-ru="Ваше сообщение">Ваше
+                        сообщение</label>
+                    <textarea name="message" rows="4" required
+                              class="w-full px-4 py-3 bg-white dark:bg-dark-800 border border-gray-300 dark:border-dark-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all resize-none"
+                              placeholder="Расскажите о вашем проекте..."
+                              data-en-placeholder="Tell me about your project..."
+                              data-ru-placeholder="Расскажите о вашем проекте..."></textarea>
+                </div>
+                <button type="submit"
+                        class="w-full px-8 py-4 bg-gradient-to-r from-primary-500 to-accent hover:from-primary-600 hover:to-purple-600 text-white font-medium rounded-lg transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                    <span data-en="Send Message" data-ru="Отправить сообщение">Отправить сообщение</span>
+                    <svg class="w-5 h-5 inline ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="container mx-auto px-6 py-8 mt-12 border-t border-gray-200 dark:border-dark-700">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+            <span class="text-2xl font-display font-bold gradient-text" data-en="Artem Alimpiev"
+                  data-ru="Артем Алимпиев">Артем Алимпиев</span>
+            <p class="text-gray-600 dark:text-gray-400 mt-2" data-en="Building the future, one line of code at a time."
+               data-ru="Строим будущее, одна строка кода за раз.">
+                Строим будущее, одна строка кода за раз.
+            </p>
+        </div>
+        <div class="flex space-x-6">
+            <a href="https://github.com/Artem7898"
+               class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors"
+               target="_blank"
+               rel="noopener noreferrer">
+                <span class="sr-only">GitHub</span>
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/artem-alimpiev/"
+               class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors"
+               target="_blank"
+               rel="noopener noreferrer">
+                <span class="sr-only">LinkedIn</span>
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+            <a href="https://t.me/Artem_Alimpiev"
+               class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors"
+               target="_blank"
+               rel="noopener noreferrer">
+                <span class="sr-only">Telegram</span>
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+    <div class="mt-8 pt-8 border-t border-gray-200 dark:border-dark-700 text-center text-gray-600 dark:text-gray-400">
+        <p data-en="&copy; 2025 Artem Alimpiev. Built with FastAPI & Tailwind CSS. All rights reserved."
+           data-ru="&copy; 2025 Артем Алимпиев. Создано с помощью FastAPI & Tailwind CSS. Все права защищены.">
+            &copy; 2025 Артем Алимпиев. Создано с помощью FastAPI & Tailwind CSS. Все права защищены.
+        </p>
+    </div>
+</footer>
+
+<!-- JavaScript for interactivity -->
+<script>
+    // Language switcher
+    let currentLang = 'ru';
+
+    function switchLanguage(lang) {
+        currentLang = lang;
+
+        // Update all elements with data attributes
+        document.querySelectorAll('[data-en], [data-ru]').forEach(element => {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                // Handle input placeholders
+                const enPlaceholder = element.getAttribute('data-en-placeholder');
+                const ruPlaceholder = element.getAttribute('data-ru-placeholder');
+                if (enPlaceholder && ruPlaceholder) {
+                    element.placeholder = lang === 'en' ? enPlaceholder : ruPlaceholder;
+                }
+            } else {
+                // Handle text content
+                const enText = element.getAttribute('data-en');
+                const ruText = element.getAttribute('data-ru');
+                if (enText && ruText) {
+                    element.textContent = lang === 'en' ? enText : ruText;
+                }
+            }
+        });
+
+        // Update page title
+        const title = document.querySelector('title');
+        const enTitle = title.getAttribute('data-en');
+        const ruTitle = title.getAttribute('data-ru');
+        if (enTitle && ruTitle) {
+            title.textContent = lang === 'en' ? enTitle : ruTitle;
+        }
+
+        // Update html lang attribute
+        document.documentElement.lang = lang;
+
+        // Update photo alt text
+        const profilePhoto = document.getElementById('profile-photo');
+        if (profilePhoto) {
+            const enAlt = profilePhoto.getAttribute('data-en-alt');
+            const ruAlt = profilePhoto.getAttribute('data-ru-alt');
+            if (enAlt && ruAlt) {
+                profilePhoto.alt = lang === 'en' ? enAlt : ruAlt;
+            }
+        }
+
+        // Update active language buttons
+        document.querySelectorAll('.language-switcher').forEach(button => {
+            button.classList.remove('active');
+        });
+
+        if (lang === 'ru') {
+            document.getElementById('lang-ru').classList.add('active');
+            document.getElementById('mobile-lang-ru').classList.add('active');
+        } else {
+            document.getElementById('lang-en').classList.add('active');
+            document.getElementById('mobile-lang-en').classList.add('active');
+        }
+
+        // Save language preference
+        localStorage.setItem('preferredLang', lang);
+    }
+
+    // Language toggle buttons
+    document.getElementById('lang-ru').addEventListener('click', () => switchLanguage('ru'));
+    document.getElementById('lang-en').addEventListener('click', () => switchLanguage('en'));
+    document.getElementById('mobile-lang-ru').addEventListener('click', () => switchLanguage('ru'));
+    document.getElementById('mobile-lang-en').addEventListener('click', () => switchLanguage('en'));
+
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+
+    themeToggle.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        sunIcon.classList.toggle('hidden');
+        moonIcon.classList.toggle('hidden');
+
+        // Save preference
+        const isDark = document.documentElement.classList.contains('dark');
+        localStorage.setItem('darkMode', isDark);
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+
+                // Close mobile menu if open
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    });
+
+    // Animate skill bars on scroll
+    const observerOptions = {
+        threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('.skill-progress').forEach(progress => {
+                    progress.style.width = progress.style.width;
+                });
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.skill-bar').forEach(bar => {
+        observer.observe(bar);
+    });
+
+    // Check saved preferences
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.documentElement.classList.add('dark');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+    }
+
+    const savedLang = localStorage.getItem('preferredLang') || 'ru';
+    switchLanguage(savedLang);
+</script>
+</body>
+</html>

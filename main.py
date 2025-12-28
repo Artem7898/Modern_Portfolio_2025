@@ -1,18 +1,29 @@
-from fastapi import FastAPI, Request, Form, Depends, BackgroundTasks
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, EmailStr
-from typing import Annotated
 from contextlib import asynccontextmanager
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
 from dotenv import load_dotenv
+from fastapi import FastAPI, Request, Form, BackgroundTasks, HTTPException
+from pydantic import BaseModel, EmailStr, ValidationError
+from datetime import datetime
+import logging
+
 
 # Загружаем переменные окружения
 load_dotenv()
+# Явно указываем кодировку для .env файла
+load_dotenv(encoding='utf-8')
+
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
+
+# Настройка логирования
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 
 
 # Lifespan async context manager
@@ -209,21 +220,83 @@ async def root(request: Request):
         "projects": projects,
         "skills": skills
     })
+    # Замените строки 214-230 на это:
 
 
-# Contact form API endpoint with BackgroundTasks
 @app.post("/contact")
 async def contact(
-        name: Annotated[str, Form()],
-        email: Annotated[str, Form()],
-        message: Annotated[str, Form()],
-        background_tasks: BackgroundTasks
+        name: str = Form(...),
+        email: str = Form(...),
+        message: str = Form(...),
+        background_tasks: BackgroundTasks = BackgroundTasks()
 ):
-    # Validate with Pydantic v2
-    msg = ContactMessage(name=name, email=email, message=message)
+    """Обработка контактной формы с раздельной отправкой писем"""
+    # Валидация с помощью Pydantic v2
+    try:
+        msg = ContactMessage(name=name, email=email, message=message)
+    except ValidationError as e:
+        raise HTTPException(status_code=422, detail=e.errors())
 
-    # Add email sending to background tasks
-    background_tasks.add_task(send_email, msg)
+    # Разделяем отправку на две независимые фоновые задачи
+    background_tasks.add_task(send_notification_email, msg)  # Уведомление вам
+    background_tasks.add_task(send_auto_reply, msg)   # Автоответ пользователю
 
-    print(f"Received message from {msg.name} ({msg.email}): {msg.summary}")
-    return {"status": "success", "summary": msg.summary}
+    print(f"📩 Получено сообщение от {msg.name} ({msg.email}): {msg.summary}")
+    return {
+        "status": "success",
+        "message": "Сообщение отправлено! Вы получите подтверждение на email.",
+        "summary": msg.summary
+    }
+
+
+async def send_notification_email(msg: ContactMessage):
+    """Отправка уведомления администратору"""
+    try:
+        logger.info(f"📨 Начинаем отправку уведомления для {msg.name}")
+        logger.debug(f"SMTP конфиг: {SMTP_SERVER}:{SMTP_PORT}, user: {SMTP_USERNAME}")
+
+        message = MIMEMultipart("alternative")
+        message["Subject"] = f"📨 Новое сообщение от {msg.name}"
+        message["From"] = SMTP_USERNAME
+        message["To"] = RECIPIENT_EMAIL
+
+        # Проверяем конфигурацию
+        if not all([SMTP_SERVER, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD, RECIPIENT_EMAIL]):
+            logger.error("❌ Не все SMTP переменные настроены!")
+            return
+
+        # Текст письма (упрощенный для теста)
+        text = f"""Новое сообщение с портфолио
+        Имя: {msg.name}
+        Email: {msg.email}
+        Сообщение: {msg.message}
+        """
+
+        message.attach(MIMEText(text, "plain"))
+
+        logger.info(f"🔗 Подключаемся к {SMTP_SERVER}:{SMTP_PORT}")
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=30) as server:
+            logger.info("🔐 Включаем STARTTLS...")
+            server.starttls()
+
+            logger.info(f"🔑 Авторизуемся как {SMTP_USERNAME}")
+            server.login(SMTP_USERNAME, SMTP_PASSWORD)
+
+            logger.info(f"📤 Отправляем письмо на {RECIPIENT_EMAIL}")
+            server.sendmail(SMTP_USERNAME, RECIPIENT_EMAIL, message.as_string())
+            logger.info("✅ Письмо успешно отправлено!")
+
+    except smtplib.SMTPAuthenticationError as e:
+        logger.error(f"❌ Ошибка авторизации SMTP: {e}")
+        logger.error("Проверьте логин/пароль. Для Gmail используйте пароль приложения.")
+    except smtplib.SMTPException as e:
+        logger.error(f"❌ Ошибка SMTP: {e}")
+    except Exception as e:
+        logger.error(f"❌ Неожиданная ошибка: {e}", exc_info=True)
+
+
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=False)
